@@ -65,7 +65,7 @@
 <dependency>
     <groupId>com.aventstack</groupId>
     <artifactId>extentreports</artifactId>
-    <version>5.0.9</version>
+    <version>4.0.9</version>
 </dependency>
 <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 <dependency>

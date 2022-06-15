@@ -13,7 +13,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.MediaEntityModelProvider;
 
@@ -71,12 +70,10 @@ public class TestScript05 extends Report{
 	
 			// Setting Base URL of website Guru99
 			baseUrl = Utils.BASE_URL;
-			driver.manage().timeouts()
-					.implicitlyWait(Utils.WAIT_TIME, TimeUnit.SECONDS);
-			//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			//driver.manage().timeouts().implicitlyWait(Utils.WAIT_TIME, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Utils.WAIT_TIME));
 			// Go to http://www.demo.guru99.com/V4/
 			driver.get(baseUrl + "/V4/");
-			
 			
 			takeSnapShot(driver, strFilePath+snapNumber+"1.jpg") ; // Take snapshot
 			

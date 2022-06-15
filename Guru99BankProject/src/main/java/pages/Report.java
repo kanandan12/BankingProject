@@ -50,8 +50,7 @@ public abstract class Report {
 			long snapNumber = 100000L;
 			snapNumber = takeSnap();
 			try {
-				img = MediaEntityBuilder.createScreenCaptureFromPath
-						("./../reports/images/"+snapNumber+".jpg").build();
+				img = MediaEntityBuilder.createScreenCaptureFromPath("./../reports/images/"+snapNumber+".jpg").build();
 			} catch (IOException e) {				
 			}
 		}

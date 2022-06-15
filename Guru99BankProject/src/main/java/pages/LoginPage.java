@@ -2,7 +2,6 @@ package pages;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ public class LoginPage{
 	String strActualTitle = "Guru99 Bank Manager HomePage";
 		
 	long snapNumber = 100000L;
-	String strFilePath = "C:\\Workspace_Selenium\\Gruru99DemoProject\\reports\\Images\\";
+	String strFilePath = "./reports/Images/";
 	
 	
 	@Test
