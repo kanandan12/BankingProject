@@ -3,9 +3,7 @@ package pages;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,8 +11,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
 
 public class TestScript05 extends Report{
 	
@@ -31,7 +27,7 @@ public class TestScript05 extends Report{
 	 * 
 	 * @return
 	 */
-	@DataProvider(name = "GuruTest")
+	@DataProvider(name = "Test")
 	public Object[][] testData() {
 
 		Object[][] data = new Object[4][2];
@@ -70,7 +66,6 @@ public class TestScript05 extends Report{
 	
 			// Setting Base URL of website Guru99
 			baseUrl = Utils.BASE_URL;
-			//driver.manage().timeouts().implicitlyWait(Utils.WAIT_TIME, TimeUnit.SECONDS);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Utils.WAIT_TIME));
 			// Go to http://www.demo.guru99.com/V4/
 			driver.get(baseUrl + "/V4/");

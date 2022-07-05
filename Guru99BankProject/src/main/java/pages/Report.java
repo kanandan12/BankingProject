@@ -1,35 +1,46 @@
 package pages;
 
-import java.io.File;
-import java.io.IOException;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+//import com.aventstack.extentreports.MediaEntityModelProvider;
+//import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.model.Media;
 
 public abstract class Report {
 	
-	public static ExtentHtmlReporter html;
+	//public static ExtentHtmlReporter html;
+	public static ExtentSparkReporter spark;
 	public static ExtentReports extent;
 	public static ExtentTest test, suiteTest;
 	public String testCaseName, testNodes, testDescription, category, authors;
 
 
 	public void startResult() {
-		html = new ExtentHtmlReporter("./reports/result.html");
-		html.setAppendExisting(true);		
-		extent = new ExtentReports();		
-		extent.attachReporter(html);	
+		//html = new ExtentHtmlReporter("./reports/result.html");
+		//html.setAppendExisting(true);
+		//extent = new ExtentReports();		
+		//extent.attachReporter(html);
+		
+		// ****************************************************//
+		// ExterntHtmlReporter version 4 is no longer available
+		// version 5 is updated to ExtentSparkReporter.
+		// Please check the belo link to update.
+		// https://www.extentreports.com/docs/versions/5/java/index.html
+		// https://github.com/extent-framework/extentreports-java
+		// ****************************************************//
+		
+		spark = new ExtentSparkReporter("./reports/Spark.html");
+		spark.config().setDocumentTitle("Banking Application Automation");
+		extent = new ExtentReports();
+		extent.attachReporter(spark);
 	}
 
 
 	public ExtentTest startTestModule(String testCaseName, String testDescription) {
 		suiteTest = extent.createTest(testCaseName, testDescription);
+		suiteTest.assignAuthor("Kamalakannan");
 		return suiteTest;
 	}
 
@@ -43,15 +54,24 @@ public abstract class Report {
 
 
 	public void reportStep(String desc, String status, boolean bSnap)  {
+		
+		//****************************************************//
+		// MediaEntityModelProvider no long available in the latest
+		// version 5.
+		//https://www.extentreports.com/docs/versions/3/java/index.html
+		//****************************************************//
 
-		MediaEntityModelProvider img = null;
+		//MediaEntityModelProvider img = null;
+		Media img = null;
 		if(bSnap && !status.equalsIgnoreCase("INFO")){
 
 			long snapNumber = 100000L;
 			snapNumber = takeSnap();
 			try {
-				img = MediaEntityBuilder.createScreenCaptureFromPath("./../reports/images/"+snapNumber+".jpg").build();
-			} catch (IOException e) {				
+				img = MediaEntityBuilder.createScreenCaptureFromPath
+						("./../reports/images/"+snapNumber+".jpg").build();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		if(status.equalsIgnoreCase("PASS")) {
@@ -66,30 +86,12 @@ public abstract class Report {
 		}						
 	}
 
-
 	public void reportStep(String desc, String status) {
 		reportStep(desc, status, true);
 	}
-
 	
 	public void endResult() {
 		extent.flush();
 	}
-	
-	/*public void takeSnapShot(WebDriver webdriver, String fileWithPath) throws Exception{
-		
-		//Convert web driver object to TakeScreenshot
-		TakesScreenshot scrShot =((TakesScreenshot)webdriver);
-		 
-		//Call getScreenshotAs method to create image file
-		File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
-		 
-		//Move image file to new destination
-		File DestFile=new File(fileWithPath);
-		 
-		//Copy file at destination
-		FileUtils.copyFile(SrcFile, DestFile);
-	}*/
-	
 
 }

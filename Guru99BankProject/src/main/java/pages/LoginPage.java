@@ -1,15 +1,15 @@
 package pages;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
-import util.Reports;
 
 public class LoginPage{
 
-	FirefoxDriver driver;
+	//FirefoxDriver driver;
+	WebDriver driver;
 	String strActualTitle = "Guru99 Bank Manager HomePage";
 		
 	long snapNumber = 100000L;
@@ -21,8 +21,8 @@ public class LoginPage{
 		System.out.println("launching firefox browser"); 
 		System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver.exe");
 		driver = new FirefoxDriver();
+				
 		driver.manage().window().maximize();
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 	}
 
@@ -41,15 +41,15 @@ public class LoginPage{
 		String strGetTitle;
 			
 		// Enter User name
-		driver.findElementByName("uid").clear(); // Good practice to clear a field before use
-		driver.findElementByName("uid").sendKeys("mngr309297");
+		driver.findElement(By.name("uid")).clear();// Good practice to clear a field before use
+		driver.findElement(By.name("uid")).sendKeys("mngr309297");
 									
 		// Enter Password
-		driver.findElementByName("password").clear(); // Good practice to clear a field before use
-		driver.findElementByName("password").sendKeys("hyqUsEt");
+		driver.findElement(By.name("password")).clear(); // Good practice to clear a field before use
+		driver.findElement(By.name("password")).sendKeys("hyqUsEt");
 											
 		// Login Button.
-		driver.findElementByName("btnLogin").click();
+		driver.findElement(By.name("btnLogin")).click();
 				
 		strGetTitle = driver.getTitle();
 		if (strGetTitle.contains(strActualTitle)) {
